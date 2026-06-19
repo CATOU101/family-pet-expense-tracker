@@ -40,7 +40,7 @@ class AppErrorBoundary extends React.Component<{
 }
 
 function AppContent() {
-  const { user, loading } = useAuth();
+  const { user, loading, authError } = useAuth();
   const mode = new URLSearchParams(window.location.search).get('mode') || 'login';
 
   if (loading) {
@@ -48,6 +48,19 @@ function AppContent() {
       <div className="loading-container">
         <div className="spinner" />
         <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (authError) {
+    return (
+      <div className="config-error-page">
+        <div className="config-error-card">
+          <h1>Firebase authentication failed</h1>
+          <p>This app could not initialize Firebase because the client configuration is invalid.</p>
+          <pre>{authError}</pre>
+          <p>Please check your Firebase environment variables in Vercel and redeploy.</p>
+        </div>
       </div>
     );
   }
