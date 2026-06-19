@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useExpense } from '../context/ExpenseContext';
 import { useAuth } from '../context/AuthContext';
 import './BudgetForm.css';
@@ -23,7 +23,7 @@ export default function BudgetForm({ onClose }: BudgetFormProps) {
     Pet: ['Food', 'Veterinary', 'Grooming', 'Toys', 'Accessories', 'Training', 'Other'],
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) return;
 

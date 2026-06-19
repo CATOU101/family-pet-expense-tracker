@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useExpense } from '../context/ExpenseContext';
 import { useAuth } from '../context/AuthContext';
 import './ExpenseForm.css';
@@ -15,7 +15,7 @@ export default function ExpenseForm({ onClose }: ExpenseFormProps) {
     description: '',
     amount: '',
     category: 'Family' as 'Family' | 'Pet',
-    subcategory: 'Food',
+    subcategory: 'Groceries',
     date: new Date().toISOString().split('T')[0],
   });
 
@@ -24,7 +24,7 @@ export default function ExpenseForm({ onClose }: ExpenseFormProps) {
     Pet: ['Food', 'Veterinary', 'Grooming', 'Toys', 'Accessories', 'Training', 'Other'],
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) return;
 
